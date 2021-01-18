@@ -1,0 +1,34 @@
+
+<div id="demo">Test</div>
+
+
+<script>
+function getElements(position = [], seperator = '', input_str = '') {
+    let splittedArr =  input_str.split(seperator);
+
+    try {
+        let new_text = '';
+        let sel_element;
+        for (i = 0; i < position.length; i++) {
+            let sel_pos = position[i];
+            if(sel_pos == -1) {                     // -1 = fetch from last elemnt of splitted array
+                let last_pos = splittedArr.length;
+                sel_element = splittedArr[last_pos - 1];
+                new_text += "Position " + last_pos + " => " +  sel_element + "<br>";
+            } else {
+                sel_element = splittedArr[sel_pos - 1];
+                new_text += "Position " + sel_pos + " => " +  sel_element + "<br>";
+            }
+        } 
+
+        return new_text;
+    } catch(err) {
+        return err.message;
+    }
+}
+
+
+const input_str = "2|5|6_4_8_2_1/1|2536";               // input striing to test
+const msg = getElements([2, -1], '|', input_str);       // 2 = second postion & -1 = last postion from which element need to fetch
+document.getElementById("demo").innerHTML= msg;
+</script>
